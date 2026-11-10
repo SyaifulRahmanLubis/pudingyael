@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Puding Lumer – Puding Rumahan Segar Setiap Hari</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#fff4dc; --surface:#fffaf0; --ink:#3a2214; --muted:#7a5a46; --line:#ecd6ae;
+  --caramel:#a8531a; --on-caramel:#fff7ea; --pandan:#3f7d58;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#241710; --surface:#32211773; --ink:#fbe9cc; --muted:#cfae8c; --line:#4d3526;
+    --caramel:#e08a45; --on-caramel:#2a1508; --pandan:#7fc094; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#241710; --surface:#32211773; --ink:#fbe9cc; --muted:#cfae8c; --line:#4d3526;
+  --caramel:#e08a45; --on-caramel:#2a1508; --pandan:#7fc094; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.55 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif;line-height:1.1;margin:0}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font:800 1.25rem "Bricolage Grotesque",sans-serif}
+.cartlink{background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:9px 16px;font:600 .9rem Figtree,sans-serif;cursor:pointer}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--pandan);outline-offset:2px}
+
+.hero{text-align:center;padding:16px 0 36px}
+.hero h1{font-size:clamp(2.3rem,10vw,3.6rem);font-weight:800;letter-spacing:-.02em;margin-top:18px}
+.hero p{max-width:34ch;margin:14px auto 22px;color:var(--muted)}
+.pud{width:150px;height:120px;margin:0 auto;position:relative;cursor:pointer;background:none;border:0;padding:0;display:block;transform-origin:50% 100%}
+.pud i{position:absolute;left:0;right:0;bottom:0;height:92px;background:#f3c24f;clip-path:polygon(14% 0,86% 0,100% 100%,0 100%);border-radius:4px}
+.pud b{position:absolute;left:10%;right:10%;top:8px;height:34px;background:var(--caramel);border-radius:50% 50% 40% 40%/70% 70% 40% 40%}
+.pud:active,.pud.jig{animation:jig .7s}
+@keyframes jig{0%,100%{transform:scale(1,1)}20%{transform:scale(1.08,.9)}40%{transform:scale(.94,1.07)}60%{transform:scale(1.04,.96)}80%{transform:scale(.98,1.02)}}
+@media (prefers-reduced-motion:reduce){.pud:active,.pud.jig{animation:none}}
+.btn{display:inline-block;background:var(--caramel);color:var(--on-caramel);border:0;border-radius:12px;padding:13px 22px;font:700 1rem Figtree,sans-serif;text-decoration:none;cursor:pointer}
+
+h2{font-size:1.7rem;font-weight:700;margin:8px 0 16px}
+.grid{display:grid;gap:12px}
+.item{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.mini{width:56px;height:50px;position:relative}
+.mini i{position:absolute;inset:14px 0 0;background:var(--c);clip-path:polygon(14% 0,86% 0,100% 100%,0 100%)}
+.mini b{position:absolute;left:8%;right:8%;top:8px;height:14px;background:var(--t,var(--caramel));border-radius:50% 50% 40% 40%/70% 70% 40% 40%}
+.item h3{font-size:1.05rem}
+.item small{color:var(--muted);display:block;line-height:1.35}
+.price{font-weight:600;margin-top:4px}
+.add{background:transparent;border:2px solid var(--caramel);color:var(--caramel);border-radius:10px;padding:8px 12px;font:700 .9rem Figtree,sans-serif;cursor:pointer;white-space:nowrap}
+.step{display:flex;align-items:center;gap:8px}
+.step button{width:32px;height:32px;border-radius:50%;border:2px solid var(--caramel);background:transparent;color:var(--caramel);font:700 1.1rem/1 Figtree,sans-serif;cursor:pointer}
+.step span{min-width:1.2em;text-align:center;font-weight:700}
+
+#cart{margin:36px 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.total{display:flex;justify-content:space-between;font:800 1.3rem "Bricolage Grotesque",sans-serif;margin:14px 0}
+.empty{color:var(--muted)}
+label{display:block;font-weight:600;margin:12px 0 4px}
+input[type=text]{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+#order{width:100%;margin-top:16px;text-align:center}
+#order[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.info{display:grid;gap:10px;margin:0 0 36px;padding:0;list-style:none}
+.info li{border-left:4px solid var(--pandan);padding-left:12px}
+footer{text-align:center;color:var(--muted);padding:12px 0 32px;font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo">Puding Lumer</div>
+    <button class="cartlink" id="jump">Keranjang (<span id="cnt">0</span>)</button>
+  </header>
+
+  <section class="hero">
+    <button class="pud" id="pud" aria-label="Goyangkan puding"><i></i><b></b></button>
+    <h1>Puding lembut, dibuat pagi ini.</h1>
+    <p>Dimasak tanpa pengawet, dikirim dingin ke rumahmu. Ketuk pudingnya, lihat goyangannya.</p>
+    <a class="btn" href="#menu">Lihat menu</a>
+  </section>
+
+  <section id="menu">
+    <h2>Menu puding</h2>
+    <div class="grid" id="list"></div>
+  </section>
+
+  <section id="cart">
+    <h2>Keranjang</h2>
+    <div id="lines"></div>
+    <div class="total"><span>Total</span><span id="sum">Rp0</span></div>
+    <label for="nama">Nama kamu</label>
+    <input type="text" id="nama" placeholder="Contoh: Sari" autocomplete="name">
+    <label for="alamat">Alamat pengiriman</label>
+    <input type="text" id="alamat" placeholder="Jalan, nomor, kota" autocomplete="street-address">
+    <a class="btn" id="order" href="#" aria-disabled="true" target="_blank" rel="noopener">Pesan lewat WhatsApp</a>
+  </section>
+
+  <ul class="info">
+    <li><b>Pesan sebelum jam 14.00</b><br>Dikirim hari yang sama untuk area dalam kota.</li>
+    <li><b>Tahan 3 hari di kulkas</b><br>Simpan di suhu 4°C dan habiskan dalam 3 hari.</li>
+    <li><b>Pesanan banyak?</b><br>Hubungi kami untuk paket acara minimal 20 cup.</li>
+  </ul>
+  <footer>© 2026 Puding Lumer · Ganti nomor WhatsApp di kode sebelum dipakai</footer>
+</div>
+
+<script>
+var WA = "6281234567890"; // ganti dengan nomor WhatsApp toko
+var items = [
+  {id:1,n:"Puding Cokelat",d:"Cokelat pekat dengan vla vanila",p:12000,c:"#6b3a22",t:"#f0e3c8"},
+  {id:2,n:"Puding Karamel",d:"Klasik, saus karamel gurih manis",p:10000,c:"#f3c24f",t:"#a8531a"},
+  {id:3,n:"Puding Pandan",d:"Aroma pandan dan santan lembut",p:11000,c:"#7cb383",t:"#f3e6a8"},
+  {id:4,n:"Puding Mangga",d:"Mangga segar, asam manis ringan",p:13000,c:"#f5a53b",t:"#fbd77a"},
+  {id:5,n:"Puding Roti Tawar",d:"Rasa rumahan, tekstur padat lembut",p:9000,c:"#e9c88f",t:"#a8531a"},
+  {id:6,n:"Paket Isi 6",d:"Pilih campur rasa, lebih hemat",p:60000,c:"#c98b6b",t:"#fbe9cc"}
+];
+var cart = {};
+var rp = function(n){return "Rp"+n.toLocaleString("id-ID")};
+
+function render(){
+  var list = document.getElementById("list"), html = "";
+  items.forEach(function(it){
+    var q = cart[it.id]||0;
+    html += '<div class="item"><div class="mini" style="--c:'+it.c+';--t:'+it.t+'"><i></i><b></b></div>'+
+      '<div><h3>'+it.n+'</h3><small>'+it.d+'</small><div class="price">'+rp(it.p)+'</div></div>'+
+      (q ? '<div class="step"><button data-m="'+it.id+'" aria-label="Kurangi">−</button><span>'+q+'</span><button data-a="'+it.id+'" aria-label="Tambah">+</button></div>'
+         : '<button class="add" data-a="'+it.id+'">Tambah</button>')+'</div>';
+  });
+  list.innerHTML = html;
+
+  var lines = "", sum = 0, cnt = 0, msg = [];
+  items.forEach(function(it){
+    var q = cart[it.id]||0;
+    if(q){ var s=q*it.p; sum+=s; cnt+=q;
+      lines += '<div class="row"><span>'+q+' × '+it.n+'</span><span>'+rp(s)+'</span></div>';
+      msg.push("- "+q+" x "+it.n+" ("+rp(s)+")"); }
+  });
+  document.getElementById("lines").innerHTML = lines || '<p class="empty">Keranjang masih kosong. Pilih puding dari menu di atas.</p>';
+  document.getElementById("sum").textContent = rp(sum);
+  document.getElementById("cnt").textContent = cnt;
+  var nama = document.getElementById("nama").value.trim(), alamat = document.getElementById("alamat").value.trim();
+  var ok = cnt>0 && nama && alamat, a = document.getElementById("order");
+  a.setAttribute("aria-disabled", ok ? "false" : "true");
+  var text = "Halo, saya "+nama+". Saya mau pesan:\n"+msg.join("\n")+"\nTotal: "+rp(sum)+"\nAlamat: "+alamat;
+  a.href = ok ? "https://wa.me/"+WA+"?text="+encodeURIComponent(text) : "#";
+}
+document.getElementById("list").addEventListener("click", function(e){
+  var a = e.target.getAttribute("data-a"), m = e.target.getAttribute("data-m");
+  if(a){ cart[a] = (cart[a]||0)+1; }
+  if(m){ cart[m] = Math.max(0,(cart[m]||0)-1); }
+  if(a||m) render();
+});
+["nama","alamat"].forEach(function(id){document.getElementById(id).addEventListener("input",render)});
+document.getElementById("jump").addEventListener("click",function(){document.getElementById("cart").scrollIntoView({behavior:"smooth"})});
+document.getElementById("pud").addEventListener("click",function(){
+  var p=this; p.classList.remove("jig"); void p.offsetWidth; p.classList.add("jig");
+});
+document.getElementById("order").addEventListener("click",function(e){
+  if(this.getAttribute("aria-disabled")==="true") e.preventDefault();
+});
+render();
+</script>
+</body>
+</html>
